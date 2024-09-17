@@ -1,5 +1,14 @@
 # On-Path Proxy Discovery
 
+This is the starting point for an IETF activity on on-path proxy discovery.
+
+* If you're interested, please join our [mailing list](https://sympa.uio.no/ifi.uio.no/info/oppd-ietf).
+* We plan to have a side meeting at IETF-121; more information will be given here as it becomes available.
+
+
+# draft-welzl-panrg-oppd
+### An informational draft to survey the possibilities
+
 This is the working area for the individual Internet-Draft, "On-Path Proxy Discovery".
 
 * [Editor's Copy](https://mwelzl.github.io/oppd/#go.draft-welzl-panrg-oppd.html)
