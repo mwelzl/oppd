@@ -8,19 +8,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: "IRTF"
+workgroup: "Path Aware Networking RG"
 keyword:
  - next generation
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "Path Aware Networking RG"
+  type: "Research Group"
+  mail: "panrg@irtf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/panrg"
+  github: "mwelzl/oppd"
+  latest: "https://mwelzl.github.io/oppd/draft-welzl-panrg-oppd.html"
 
 author:
  -
