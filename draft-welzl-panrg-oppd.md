@@ -42,9 +42,18 @@ TODO Abstract
 
 # Introduction
 
-TODO Introduction
+Proxy systems can carry out functions that improve the performance of an end-to-end connection; this includes to just offer information. To do this, it is usually desirable for such systems to be located on the path(s) that the connection traverses. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems - and such choice requires a signaling channel to detect the proxy and communicate with it.
 
-A test, to make a start.
+For protocols such as QUIC, where encryption prevents proxies from transparently interfering with traffic, or when performance enhancing proxy functions are desired, chosen and configured by an end system,
+
+
+There are various ways in which on-path proxies can be discovered, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.
+
+This document is meant  to serve as a starting point towards the design of approaches to discover on-path proxies by surveying some possibilities that are available.
+
+
+Remember to check and, if it makes sense, cite:
+draft-kuehlewind-quic-proxy-discovery-01
 
 
 # Conventions and Definitions

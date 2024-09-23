@@ -1,9 +1,24 @@
-# On-Path Proxy Discovery
+# On-Path Proxy Discovery (OPPD)
 
 This is the starting point for an IETF activity on on-path proxy discovery.
 
-* If you're interested, please join our [mailing list](https://sympa.uio.no/ifi.uio.no/info/oppd-ietf).
+* If you're interested, please join our [mailing list](https://groups.google.com/g/oppd-ietf).
 * We plan to have a side meeting at IETF-121; more information will be given here as it becomes available.
+
+## Who needs this?
+
+* If [SCONE](https://datatracker.ietf.org/group/sconepro/about/) gets chartered, we think it will need OPPD.
+* There are some research works that show a need, including:
+  * Gina Yuan, Matthew Sotoudeh, David K. Zhang, Michael Welzl, David Mazières, Keith Winstein: "[Sidekick: In-Network Assistance for Secure End-to-End Transport Protocols](https://www.usenix.org/conference/nsdi24/presentation/yuan)", Usenix NSDI '24, Santa Clara, CA, USA, 16-18 April 2024. *(Recipient of Outstanding paper award and Community award)*
+  * M. Kosek, B. Spies and J. Ott, "[Secure Middlebox-Assisted QUIC](https://ieeexplore.ieee.org/document/10186363)", 2023 IFIP Networking Conference (IFIP Networking), Barcelona, Spain, 2023. [Preprint](https://arxiv.org/abs/2307.08543)
+
+## Where in the IETF / IRTF would this work fit?
+
+We think that potential venues are:
+
+* [SCONE](https://datatracker.ietf.org/group/sconepro/about/) if it gets chartered - but we don't want to wait and get started with OPPD already.
+* [TSVWG](https://datatracker.ietf.org/wg/tsvwg/about/)
+* [IRTF PANRG](https://datatracker.ietf.org/rg/panrg/about/)
 
 
 # draft-welzl-panrg-oppd
