@@ -44,7 +44,7 @@ This document surveys possibilities for on-path proxy discovery. It is meant to 
 
 # Introduction
 
-Proxies systems can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from quite minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.
+Proxies can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.
 
 It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling method to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it.
 
@@ -61,6 +61,16 @@ This document surveys some possibilities that are available for on-path proxy di
 # A survey of possibilities
 
 TODO. The idea is to describe the method in our two research papers (see README), and others we know of.
+
+
+# A survey of open issues
+
+Just an idea, having a separate list of common problems to be considered might be helpful. For example:
+
+* How to handle multiple devices on a path?
+* How to deal with multi-path?
+
+This list will become longer as we add mechanisms to the preceding section.
 
 
 # Security Considerations
