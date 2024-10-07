@@ -25,7 +25,7 @@ venue:
 author:
  -
     fullname: "Michael Welzl"
-    organization: Your Organization Here
+    organization: University of Oslo
     email: "michawe@ifi.uio.no"
 
 normative:
@@ -35,30 +35,32 @@ informative:
 
 --- abstract
 
-TODO Abstract
+[ Please add something to this, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ]
+
+This document surveys possibilities for on-path proxy discovery. It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin.
 
 
 --- middle
 
 # Introduction
 
-Proxy systems can carry out functions that improve the performance of an end-to-end connection; this includes to just offer information. To do this, it is usually desirable for such systems to be located on the path(s) that the connection traverses. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems - and such choice requires a signaling channel to detect the proxy and communicate with it.
+Proxies systems can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from quite minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.
 
-For protocols such as QUIC, where encryption prevents proxies from transparently interfering with traffic, or when performance enhancing proxy functions are desired, chosen and configured by an end system,
-
+It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling method to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it.
 
 There are various ways in which on-path proxies can be discovered, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.
 
-This document is meant  to serve as a starting point towards the design of approaches to discover on-path proxies by surveying some possibilities that are available.
-
-
-Remember to check and, if it makes sense, cite:
-draft-kuehlewind-quic-proxy-discovery-01
+This document surveys some possibilities that are available for on-path proxy discovery. It is meant to serve as a starting point towards the design of approaches to do so.
 
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
+
+
+# A survey of possibilities
+
+TODO. The idea is to describe the method in our two research papers (see README), and others we know of.
 
 
 # Security Considerations
