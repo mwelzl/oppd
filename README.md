@@ -5,6 +5,8 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 * If you're interested, please join our [mailing list](https://groups.google.com/g/oppd-ietf).
 * We plan to have a side meeting at IETF-121; more information will be given here as it becomes available.
 
+**Please don't hesitate to edit anything here - including this readme file!**
+ 
 ## Who needs this?
 
 * Once [SCONE](https://datatracker.ietf.org/group/sconepro/about/) is chartered, we think it will need OPPD.

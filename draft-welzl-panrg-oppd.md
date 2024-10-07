@@ -35,7 +35,7 @@ informative:
 
 --- abstract
 
-[ Please add something to this, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ]
+[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ]
 
 This document surveys possibilities for on-path proxy discovery. It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin.
 
