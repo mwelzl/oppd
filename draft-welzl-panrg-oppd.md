@@ -56,8 +56,7 @@ informative:
       date: 2024
   SMAQ:
       title: "Secure Middlebox-Assisted QUIC"
-      seriesinfo:
-          IFIP NETWORKING 2023
+      seriesinfo: IFIP NETWORKING 2023
       authors:
       -
         ins: M. Kosek
