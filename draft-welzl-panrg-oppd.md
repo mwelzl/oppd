@@ -58,16 +58,16 @@ informative:
       title: "Secure Middlebox-Assisted QUIC"
       seriesinfo: IFIP NETWORKING 2023
       authors:
-      -
-        ins: M. Kosek
-        name: Mike Kosek
-      -
-        ins: B. Spiess
-        name: Benedikt Spiess
-      -
-        ins: J. Ott
-        name: Joerg Ott
-    date: 2023
+        -
+          ins: M. Kosek
+          name: Mike Kosek
+        -
+          ins: B. Spiess
+          name: Benedikt Spiess
+        -
+          ins: J. Ott
+          name: Joerg Ott
+      date: 2023
   I-D.kuehlewind-quic-proxy-discovery:
 
 
