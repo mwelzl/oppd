@@ -112,13 +112,13 @@ This document surveys some possibilities that are available for OPPD.
 
 ## Sidekick
 
-In {{Sidekick}}, endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receivers, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
+In {{?Sidekick}}, endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receivers, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
 
 The proxy replies to a sidekick-request packet by sending a special packet from the receiver's IP address and port number back to the endpoint. This packet contains a sidekick-reply marker, an opaque session ID, and an IP address and port number for communicating with the proxy. Upon receiving the sidekick-reply packet, the sender begins communicating directly with the proxy from a different UDP port. It initially sends back the session ID and configuration parameters to start receiving quACKs (special ACKs crafted by a Sidekick proxy).
 
 ## SMAQ
 
-In {{SMAQ}}, ...TODO.
+In {{?SMAQ}}, ...TODO.
 
 ## UDP options
 
