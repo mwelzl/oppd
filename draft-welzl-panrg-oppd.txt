@@ -18,9 +18,9 @@ Abstract
    I'm the primary dude here (is that really justified?), and that we
    target PANRG.  Should it carry a different name? ]
 
-   This document surveys possibilities for on-path proxy discovery.  It
-   is meant to help the conversation in a planned side meeting at
-   IETF-121 in Dublin.
+   This document surveys possibilities for On-Path Proxy Discovery
+   (OPPD).  It is meant to help the conversation in a planned side
+   meeting at IETF-121 in Dublin.
 
 About This Document
 
@@ -74,14 +74,20 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  A survey of possibilities
-   4.  A survey of open issues
-   5.  Examined material that was not included
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   3.  Terminology
+   4.  General assumptions
+   5.  A survey of possibilities
+     5.1.  Sidekick
+     5.2.  SMAQ
+     5.3.  UDP options
+     5.4.  Please insert your idea here
+   6.  A survey of open issues
+   7.  Examined material that was not included
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -103,12 +109,11 @@ Table of Contents
    enhancing function to end systems -- and such a choice requires a
    means to detect the proxy and explicitly communicate with it.
 
-   There are various ways in which on-path proxies can be discovered,
-   and they differ from the ways in which end systems learn about
+   There are various ways in which On-Path Proxy Discovery (OPPD) can
+   work, and they differ from the ways in which end systems learn about
    proxies that are not necessarily on-path.
 
-   This document surveys some possibilities that are available for on-
-   path proxy discovery.
+   This document surveys some possibilities that are available for OPPD.
 
 2.  Conventions and Definitions
 
@@ -118,12 +123,65 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  A survey of possibilities
+3.  Terminology
 
-   TODO.  The idea is to describe the method in our two research papers
-   (see README), and others we know of.
+   *  Base connection: an end-to-end connection between two endpoints on
+      which an on-path proxy is expect to carry out a performance-
+      improving function.
 
-4.  A survey of open issues
+   *  Endpoint: an entity that communicates with one or more other
+      endpoints using a specific transport protocol.  It is locally
+      identified by the 5-tuple of IP address pair, protocol and port
+      numbers.
+
+4.  General assumptions
+
+   *  On-path proxy devices are expected to carry out functions in
+      relation to a base connection.  Thus, they must be on the same
+      path, which means that communication with them must use the same
+      5-tuple.
+
+   *  Endpoint initiation: OPPD must be initiated by an endpoint.
+      First, in the presence of NATs, this is the only way to ensure
+      that communication with the proxy use the same IP addresses and
+      port numbers as the base connection.  Second, in this way,
+      endpoints can execute some kind of flow control to avoid the
+      reception of many unsolicited announcements.
+
+5.  A survey of possibilities
+
+5.1.  Sidekick
+
+   In [Sidekick], endpoints signal proxy support by sending a
+   distinguished packet containing a 128-byte sidekick-request marker.
+   Such inline signaling could confuse receivers, but sidekicks target
+   protocols such as QUIC that discard cryptographically unauthenticated
+   data anyway.
+
+   The proxy replies to a sidekick-request packet by sending a special
+   packet from the receiver's IP address and port number back to the
+   endpoint.  This packet contains a sidekick-reply marker, an opaque
+   session ID, and an IP address and port number for communicating with
+   the proxy.  Upon receiving the sidekick-reply packet, the sender
+   begins communicating directly with the proxy from a different UDP
+   port.  It initially sends back the session ID and configuration
+   parameters to start receiving quACKs (special ACKs crafted by a
+   Sidekick proxy).
+
+5.2.  SMAQ
+
+   In [SMAQ], ...TODO.
+
+5.3.  UDP options
+
+   TODO.  Describe the possibility (if there is one?).
+
+5.4.  Please insert your idea here
+
+   ... or something that already exists.  And give a brief description
+   of how it works.
+
+6.  A survey of open issues
 
    Just an idea, having a separate list of common problems to be
    considered might be helpful.  For example:
@@ -132,31 +190,53 @@ Table of Contents
 
    *  How to deal with multi-path?
 
+      -  Suggestion (Michael): we ignore it, we just apply the discovery
+         per path.  Endpoints are expected to initiate the discovery
+         process for every path at which they want to make use of a
+         proxy should a proxy be available.
+
    This list will become longer as we add mechanisms to the preceding
    section.
 
-5.  Examined material that was not included
+7.  Examined material that was not included
 
-   [I-D.kuehlewind-quic-proxy-discovery] contains various ideas on proxy
-   discovery, but the proxies in question need not be on-path.  One
-   notable possibility mentioned in
+   [I-D.kuehlewind-quic-proxy-discovery] lists several possibilities for
+   proxy discovery, but the proxies in question need not be on-path.
+   One notable possibility mentioned in
    [I-D.kuehlewind-quic-proxy-discovery] document is the use of PCP;
    this is, in some sense, an on-path discovery method since NATs are
    necessarily on-path.  However, there is no reason to limit the
    discovery process described in the present document to scenarios with
    NATs only.
 
-6.  Security Considerations
+8.  Security Considerations
 
-   TODO Security
+   TODO Security: for now this is copy+pasted text from the NSDI paper.
 
-7.  IANA Considerations
+   A malicious third-party could execute a reflection amplification
+   attack that generates a large amount of traffic while hiding its
+   source.  This is possible because the sender requests quACKs to a
+   different port and (for some carrier-grade NATs) IP address from the
+   underlying session.  To mitigate this, each quACK contains a quota,
+   initially 1, of remaining quACKs the proxy will send as well as an
+   updated session ID.  The quota and session ID ensure only the sender
+   can increase the quota or otherwise reconfigure the session.
+
+   An adversarial PEP could send misleading information to the sender.
+   Note that only on-path PEPs can send credible information, since they
+   refer to unique packet identifiers.  To mitigate this, the sender can
+   consider PEP feedback along with end-to-end metrics to determine
+   whether to keep using the PEP.  The sender can always opt out of the
+   PEP, and the PEP cannot actively manipulate traffic any more than
+   outside a sidekick setting.
+
+9.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  References
+10.  References
 
-8.1.  Normative References
+10.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -167,7 +247,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-8.2.  Informative References
+10.2.  Informative References
 
    [I-D.kuehlewind-quic-proxy-discovery]
               Kühlewind, M. and Z. Sarker, "Discovery Mechanism for
@@ -176,6 +256,12 @@ Table of Contents
               discovery-01, 27 January 2020,
               <https://datatracker.ietf.org/doc/html/draft-kuehlewind-
               quic-proxy-discovery-01>.
+
+   [Sidekick] "Sidekick: In-Network Assistance for Secure End-to-End
+              Transport Protocols", Usenix NSDI 2024 , 2024.
+
+   [SMAQ]     "Secure Middlebox-Assisted QUIC", IFIP NETWORKING 2023 ,
+              2023.
 
 Acknowledgments
 
