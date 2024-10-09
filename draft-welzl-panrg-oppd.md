@@ -31,7 +31,6 @@ author:
 normative:
 
 informative:
-  I-D.kuehlewind-quic-proxy-discovery:
   Sidekick:
       title: "Sidekick: In-Network Assistance for Secure End-to-End Transport Protocols"
       seriesinfo: Usenix NSDI 2024
