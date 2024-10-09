@@ -4,8 +4,8 @@
 
 Path Aware Networking RG                                        M. Welzl
 Internet-Draft                                        University of Oslo
-Intended status: Informational                            7 October 2024
-Expires: 10 April 2025
+Intended status: Informational                            9 October 2024
+Expires: 12 April 2025
 
 
                         On-Path Proxy Discovery
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2025.
+   This Internet-Draft will expire on 12 April 2025.
 
 Copyright Notice
 
@@ -76,9 +76,12 @@ Table of Contents
    2.  Conventions and Definitions
    3.  A survey of possibilities
    4.  A survey of open issues
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  Normative References
+   5.  Examined material that was not included
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -105,8 +108,7 @@ Table of Contents
    proxies that are not necessarily on-path.
 
    This document surveys some possibilities that are available for on-
-   path proxy discovery.  It is meant to serve as a starting point
-   towards the design of approaches to do so.
+   path proxy discovery.
 
 2.  Conventions and Definitions
 
@@ -126,22 +128,35 @@ Table of Contents
    Just an idea, having a separate list of common problems to be
    considered might be helpful.  For example:
 
-   *  How to handle multiple devices on a path?
+   *  How to handle multiple proxies on a path?
 
    *  How to deal with multi-path?
 
    This list will become longer as we add mechanisms to the preceding
    section.
 
-5.  Security Considerations
+5.  Examined material that was not included
+
+   [I-D.kuehlewind-quic-proxy-discovery] contains various ideas on proxy
+   discovery, but the proxies in question need not be on-path.  One
+   notable possibility mentioned in
+   [I-D.kuehlewind-quic-proxy-discovery] document is the use of PCP;
+   this is, in some sense, an on-path discovery method since NATs are
+   necessarily on-path.  However, there is no reason to limit the
+   discovery process described in the present document to scenarios with
+   NATs only.
+
+6.  Security Considerations
 
    TODO Security
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document has no IANA actions.
 
-7.  Normative References
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -151,6 +166,16 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+8.2.  Informative References
+
+   [I-D.kuehlewind-quic-proxy-discovery]
+              Kühlewind, M. and Z. Sarker, "Discovery Mechanism for
+              QUIC-based, Non-transparent Proxy Services", Work in
+              Progress, Internet-Draft, draft-kuehlewind-quic-proxy-
+              discovery-01, 27 January 2020,
+              <https://datatracker.ietf.org/doc/html/draft-kuehlewind-
+              quic-proxy-discovery-01>.
 
 Acknowledgments
 
