@@ -31,6 +31,7 @@ author:
 normative:
 
 informative:
+  I-D.kuehlewind-quic-proxy-discovery:
 
 
 --- abstract
@@ -50,7 +51,7 @@ It is commonly desirable for such proxies to be located on the path(s) that a co
 
 There are various ways in which on-path proxies can be discovered, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.
 
-This document surveys some possibilities that are available for on-path proxy discovery. It is meant to serve as a starting point towards the design of approaches to do so.
+This document surveys some possibilities that are available for on-path proxy discovery.
 
 
 # Conventions and Definitions
@@ -67,11 +68,15 @@ TODO. The idea is to describe the method in our two research papers (see README)
 
 Just an idea, having a separate list of common problems to be considered might be helpful. For example:
 
-* How to handle multiple devices on a path?
+* How to handle multiple proxies on a path?
 * How to deal with multi-path?
 
 This list will become longer as we add mechanisms to the preceding section.
 
+
+# Examined material that was not included
+
+{{?I-D.kuehlewind-quic-proxy-discovery}} contains various ideas on proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only. 
 
 # Security Considerations
 

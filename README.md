@@ -18,7 +18,7 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 
 We think that potential venues are:
 
-* [SCONE](https://datatracker.ietf.org/group/sconepro/about/) if it gets chartered - but we don't want to wait and get started with OPPD already.
+* [SCONE](https://datatracker.ietf.org/group/sconepro/about/) once it gets chartered - but we don't want to wait and get started with OPPD already.
 * [TSVWG](https://datatracker.ietf.org/wg/tsvwg/about/)
 * [IRTF PANRG](https://datatracker.ietf.org/rg/panrg/about/)
 
