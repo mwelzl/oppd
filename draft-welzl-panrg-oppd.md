@@ -76,7 +76,7 @@ This list will become longer as we add mechanisms to the preceding section.
 
 # Examined material that was not included
 
-{{?I-D.kuehlewind-quic-proxy-discovery}} contains various ideas on proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only. 
+{{?I-D.kuehlewind-quic-proxy-discovery}} contains various ideas on proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.
 
 # Security Considerations
 
