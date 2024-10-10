@@ -7,7 +7,7 @@
 <title>On-Path Proxy Discovery</title>
 <meta content="Michael Welzl" name="author">
 <meta content="
-       [ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ] 
+       [ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified, and is it a good idea?), and that we target PANRG. Should it carry a different name? ] 
        This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin. 
     " name="description">
 <meta content="xml2rfc 3.23.2" name="generator">
@@ -1062,7 +1062,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">On-Path Proxy Discovery</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ]<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified, and is it a good idea?), and that we target PANRG. Should it carry a different name? ]<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1175,27 +1175,30 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-examined-material-that-was-" class="internal xref">Examined material that was not included</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-todo-a-reading-list" class="internal xref">TODO - a reading list</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
 </li>
         </ul>
 </nav>
@@ -1207,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Proxies can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling or forwarding approach to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it. With QUIC, the encryption of packet headers necessitates using non-transparent instead of transparent proxies, and research works such as the Sidekick <span>[<a href="#Sidekick" class="cite xref">Sidekick</a>]</span> and Secure Middlebox-Assisted QUIC (SMAQ) <span>[<a href="#SMAQ" class="cite xref">SMAQ</a>]</span> have shown that this is both possible and beneficial.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling or forwarding approach to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it. With QUIC, the encryption of packet headers necessitates using non-transparent instead of transparent proxies, and research works such as the Sidekick <span>[<a href="#Sidekick" class="cite xref">Sidekick</a>]</span> and Secure Middlebox-Assisted QUIC (SMAQ) <span>[<a href="#SMAQ" class="cite xref">SMAQ</a>]</span> have shown that this is both possible and beneficial.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">There are various ways in which On-Path Proxy Discovery (OPPD) can work, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">This document surveys some possibilities that are available for OPPD.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
@@ -1230,10 +1233,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <ul class="normal">
 <li class="normal" id="section-3-1.1">
-          <p id="section-3-1.1.1">Base connection: an end-to-end connection between two endpoints on which an on-path proxy is expect to carry out a performance-improving function.<a href="#section-3-1.1.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.1.1">Base connection: an end-to-end connection between two endpoints on which an on-path proxy is expected to carry out a performance-improving function.<a href="#section-3-1.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-1.2">
-          <p id="section-3-1.2.1">Endpoint: an entity that communicates with one or more other endpoints using a specific transport protocol. It is locally identified by the 5-tuple of IP address pair, protocol and port numbers.<a href="#section-3-1.2.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.2.1">Endpoint: an entity that communicates with one or more other endpoints using a specific base connection. It is locally identified by the base connection's 5-tuple of IP address pair, protocol and port numbers.<a href="#section-3-1.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1245,10 +1248,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <ul class="normal">
 <li class="normal" id="section-4-1.1">
-          <p id="section-4-1.1.1">On-path proxy devices are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which means that communication with them must use the same 5-tuple as the base connection.<a href="#section-4-1.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-1.1.1">On-path proxies are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which, given the prevalence of functions such as Equal-Cost Multi-Path routing (ECMP) <span>[<a href="#RFC2992" class="cite xref">RFC2992</a>]</span>, means that communication with them must use the same 5-tuple as the base connection.<a href="#section-4-1.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-1.2">
-          <p id="section-4-1.2.1">Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of NATs, this is the only way to ensure that communication with the proxy use the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.<a href="#section-4-1.2.1" class="pilcrow">¶</a></p>
+          <p id="section-4-1.2.1">Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of Network Address Translators (NATs) <span>[<a href="#RFC2663" class="cite xref">RFC2663</a>]</span>, this is the only way to ensure that communication with the proxy uses the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.<a href="#section-4-1.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-1.3">
           <p id="section-4-1.3.1">Proxies must somehow prove that they are on-path, perhaps akin to the way it is done with several ICMP messages, by including the first 64 bits of the original packet that evoked them <span>[<a href="#RFC792" class="cite xref">RFC792</a>]</span>. This establishes a certain minimal level of trust, since on-path devices are in the position to do whatever they want with a connection's packets anyway -- for example discard, rate-limit or duplicate them.<a href="#section-4-1.3.1" class="pilcrow">¶</a></p>
@@ -1272,8 +1275,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-special-packet-of-base-conn">
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-special-packet-of-base-conn" class="section-name selfRef">Special packet of base connection</a>
           </h4>
-<p id="section-5.1.1-1">Sidekick <span>[<a href="#Sidekick" class="cite xref">Sidekick</a>]</span> endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1.1-2">Secure Middlebox-Assisted QUIC <span>[<a href="#SMAQ" class="cite xref">SMAQ</a>]</span> leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection. The paper mentions that, in this case, "an open problem still to overcome is the possible collision of Connection IDs".<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-1">Sidekick <span>[<a href="#Sidekick" class="cite xref">Sidekick</a>]</span> endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker over the base connection's 5-tuple. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-2">Secure Middlebox-Assisted QUIC <span>[<a href="#SMAQ" class="cite xref">SMAQ</a>]</span> leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection. The paper mentions that, in this case, "an open problem still to overcome is the possible collision of Connection IDs".
+[MICHAEL: For this, why does it matter whether OPPD uses such multiplexing?]<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="header-options">
@@ -1281,9 +1285,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <h4 id="name-header-options">
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-header-options" class="section-name selfRef">Header options</a>
           </h4>
-<p id="section-5.1.2-1">An endpoint could use a newly defined TCP option or a UDP option
+<p id="section-5.1.2-1">An endpoint could use a newly defined TCP option or UDP option
 <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span> to signal proxy support. Such an option
-could be defined to be ignored by the receiving endpoint, and receiving
+could be specified to be ignored by the receiving endpoint, and receiving
 endpoints that are not upgraded to support the option should ignore
 it anyway. In case of QUIC, for example, the QUIC implementation at the
 receiving endpoint would not even be informed about the message in the
@@ -1312,7 +1316,7 @@ additional packet.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
           <h4 id="name-header-options-2">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-header-options-2" class="section-name selfRef">Header options</a>
           </h4>
-<p id="section-5.2.2-1">A proxy could use insert a newly defined TCP option or a UDP option
+<p id="section-5.2.2-1">A proxy could insert a newly defined TCP option or UDP option
 <span>[<a href="#I-D.ietf-tsvwg-udp-options" class="cite xref">I-D.ietf-tsvwg-udp-options</a>]</span> in a returning packet (e.g., an ACK)
 to answer back to the endpoint that originally announced its proxy support.
 This approach does not require the proxy to send an additional packet.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
@@ -1352,31 +1356,39 @@ This approach does not require the proxy to send an additional packet.<a href="#
 <p id="section-7-1"><span>[<a href="#I-D.kuehlewind-quic-proxy-discovery" class="cite xref">I-D.kuehlewind-quic-proxy-discovery</a>]</span> lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in <span>[<a href="#I-D.kuehlewind-quic-proxy-discovery" class="cite xref">I-D.kuehlewind-quic-proxy-discovery</a>]</span> document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations">
+<div id="todo-a-reading-list">
 <section id="section-8">
-      <h2 id="name-security-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-todo-a-reading-list">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-todo-a-reading-list" class="section-name selfRef">TODO - a reading list</a>
       </h2>
-<p id="section-8-1">TODO.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">Look at SPUD and PLUS. At the dinner in Vancouver, STUN was also mentioned.<a href="#section-8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-9">
+      <h2 id="name-security-considerations">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-9-1">TODO.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-iana-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">This document has no IANA actions.<a href="#section-10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-10">
+<section id="section-11">
       <h2 id="name-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-10.1">
+<section id="section-11.1">
         <h3 id="name-normative-references">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1391,9 +1403,9 @@ This approach does not require the proxy to send an additional packet.<a href="#
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-10.2">
+<section id="section-11.2">
         <h3 id="name-informative-references">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-tsvwg-udp-options">[I-D.ietf-tsvwg-udp-options]</dt>
@@ -1403,6 +1415,14 @@ This approach does not require the proxy to send an additional packet.<a href="#
 <dt id="I-D.kuehlewind-quic-proxy-discovery">[I-D.kuehlewind-quic-proxy-discovery]</dt>
         <dd>
 <span class="refAuthor">Kühlewind, M.</span> and <span class="refAuthor">Z. Sarker</span>, <span class="refTitle">"Discovery Mechanism for QUIC-based, Non-transparent Proxy Services"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-kuehlewind-quic-proxy-discovery-01</span>, <time datetime="2020-01-27" class="refDate">27 January 2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kuehlewind-quic-proxy-discovery-01">https://datatracker.ietf.org/doc/html/draft-kuehlewind-quic-proxy-discovery-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2663">[RFC2663]</dt>
+        <dd>
+<span class="refAuthor">Srisuresh, P.</span> and <span class="refAuthor">M. Holdrege</span>, <span class="refTitle">"IP Network Address Translator (NAT) Terminology and Considerations"</span>, <span class="seriesInfo">RFC 2663</span>, <span class="seriesInfo">DOI 10.17487/RFC2663</span>, <time datetime="1999-08" class="refDate">August 1999</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2663">https://www.rfc-editor.org/rfc/rfc2663</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2992">[RFC2992]</dt>
+        <dd>
+<span class="refAuthor">Hopps, C.</span>, <span class="refTitle">"Analysis of an Equal-Cost Multi-Path Algorithm"</span>, <span class="seriesInfo">RFC 2992</span>, <span class="seriesInfo">DOI 10.17487/RFC2992</span>, <time datetime="2000-11" class="refDate">November 2000</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2992">https://www.rfc-editor.org/rfc/rfc2992</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC792">[RFC792]</dt>
         <dd>

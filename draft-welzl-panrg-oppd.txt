@@ -15,8 +15,9 @@ Abstract
 
    [ Please add something to this draft, and then add your name to the
    author list.  Also, consider the draft title: it now indicates that
-   I'm the primary dude here (is that really justified?), and that we
-   target PANRG.  Should it carry a different name? ]
+   I'm the primary dude here (is that really justified, and is it a good
+   idea?), and that we target PANRG.  Should it carry a different name?
+   ]
 
    This document surveys possibilities for On-Path Proxy Discovery
    (OPPD).  It is meant to help the conversation in a planned side
@@ -85,11 +86,12 @@ Table of Contents
        5.2.2.  Header options
    6.  A survey of open issues
    7.  Examined material that was not included
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   8.  TODO - a reading list
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -106,9 +108,9 @@ Table of Contents
    tunneling or forwarding approach to enforce a path.  This is
    naturally the case for transparent "Performance Enhancing Proxies"
    (PEPs) that have been implemented for TCP, but the transparent nature
-   of such proxies has caused a number of known problems in the past.
-   Non-transparent proxies leave the choice of utilizing and configuring
-   a performance enhancing function to end systems -- and such a choice
+   of such proxies has caused a number of problems in the past.  Non-
+   transparent proxies leave the choice of utilizing and configuring a
+   performance enhancing function to end systems -- and such a choice
    requires a means to detect the proxy and explicitly communicate with
    it.  With QUIC, the encryption of packet headers necessitates using
    non-transparent instead of transparent proxies, and research works
@@ -132,27 +134,29 @@ Table of Contents
 3.  Terminology
 
    *  Base connection: an end-to-end connection between two endpoints on
-      which an on-path proxy is expect to carry out a performance-
+      which an on-path proxy is expected to carry out a performance-
       improving function.
 
    *  Endpoint: an entity that communicates with one or more other
-      endpoints using a specific transport protocol.  It is locally
-      identified by the 5-tuple of IP address pair, protocol and port
-      numbers.
+      endpoints using a specific base connection.  It is locally
+      identified by the base connection's 5-tuple of IP address pair,
+      protocol and port numbers.
 
 4.  General assumptions
 
-   *  On-path proxy devices are expected to carry out functions in
-      relation to a base connection.  Thus, they must be on the same
-      path, which means that communication with them must use the same
-      5-tuple as the base connection.
+   *  On-path proxies are expected to carry out functions in relation to
+      a base connection.  Thus, they must be on the same path, which,
+      given the prevalence of functions such as Equal-Cost Multi-Path
+      routing (ECMP) [RFC2992], means that communication with them must
+      use the same 5-tuple as the base connection.
 
    *  Endpoint initiation: OPPD must be initiated by an endpoint.
-      First, in the presence of NATs, this is the only way to ensure
-      that communication with the proxy use the same IP addresses and
-      port numbers as the base connection.  Second, in this way,
-      endpoints can execute some kind of flow control to avoid the
-      reception of many unsolicited announcements.
+      First, in the presence of Network Address Translators (NATs)
+      [RFC2663], this is the only way to ensure that communication with
+      the proxy uses the same IP addresses and port numbers as the base
+      connection.  Second, in this way, endpoints can execute some kind
+      of flow control to avoid the reception of many unsolicited
+      announcements.
 
    *  Proxies must somehow prove that they are on-path, perhaps akin to
       the way it is done with several ICMP messages, by including the
@@ -172,22 +176,23 @@ Table of Contents
 5.1.1.  Special packet of base connection
 
    Sidekick [Sidekick] endpoints signal proxy support by sending a
-   distinguished packet containing a 128-byte sidekick-request marker.
-   Such inline signaling could confuse receiving endpoints, but
-   sidekicks target protocols such as QUIC that discard
-   cryptographically unauthenticated data anyway.
+   distinguished packet containing a 128-byte sidekick-request marker
+   over the base connection's 5-tuple.  Such inline signaling could
+   confuse receiving endpoints, but sidekicks target protocols such as
+   QUIC that discard cryptographically unauthenticated data anyway.
 
    Secure Middlebox-Assisted QUIC [SMAQ] leaves the design of a proxy
    discovery solution as future work, but also suggests to multiplex the
    necessary signaling over the same 5-tuple as the base connection.
    The paper mentions that, in this case, "an open problem still to
-   overcome is the possible collision of Connection IDs".
+   overcome is the possible collision of Connection IDs".  [MICHAEL: For
+   this, why does it matter whether OPPD uses such multiplexing?]
 
 5.1.2.  Header options
 
-   An endpoint could use a newly defined TCP option or a UDP option
+   An endpoint could use a newly defined TCP option or UDP option
    [I-D.ietf-tsvwg-udp-options] to signal proxy support.  Such an option
-   could be defined to be ignored by the receiving endpoint, and
+   could be specified to be ignored by the receiving endpoint, and
    receiving endpoints that are not upgraded to support the option
    should ignore it anyway.  In case of QUIC, for example, the QUIC
    implementation at the receiving endpoint would not even be informed
@@ -211,7 +216,7 @@ Table of Contents
 
 5.2.2.  Header options
 
-   A proxy could use insert a newly defined TCP option or a UDP option
+   A proxy could insert a newly defined TCP option or UDP option
    [I-D.ietf-tsvwg-udp-options] in a returning packet (e.g., an ACK) to
    answer back to the endpoint that originally announced its proxy
    support.  This approach does not require the proxy to send an
@@ -245,17 +250,22 @@ Table of Contents
    discovery process described in the present document to scenarios with
    NATs only.
 
-8.  Security Considerations
+8.  TODO - a reading list
+
+   Look at SPUD and PLUS.  At the dinner in Vancouver, STUN was also
+   mentioned.
+
+9.  Security Considerations
 
    TODO.
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -266,7 +276,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D. and C. M. Heard, "Transport Options for UDP",
@@ -282,6 +292,15 @@ Table of Contents
               discovery-01, 27 January 2020,
               <https://datatracker.ietf.org/doc/html/draft-kuehlewind-
               quic-proxy-discovery-01>.
+
+   [RFC2663]  Srisuresh, P. and M. Holdrege, "IP Network Address
+              Translator (NAT) Terminology and Considerations",
+              RFC 2663, DOI 10.17487/RFC2663, August 1999,
+              <https://www.rfc-editor.org/rfc/rfc2663>.
+
+   [RFC2992]  Hopps, C., "Analysis of an Equal-Cost Multi-Path
+              Algorithm", RFC 2992, DOI 10.17487/RFC2992, November 2000,
+              <https://www.rfc-editor.org/rfc/rfc2992>.
 
    [RFC792]   Postel, J., "Internet Control Message Protocol", STD 5,
               RFC 792, DOI 10.17487/RFC0792, September 1981,
