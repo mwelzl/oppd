@@ -69,6 +69,7 @@ informative:
           name: Joerg Ott
       date: 2023
   I-D.kuehlewind-quic-proxy-discovery:
+  I-D.ietf-tsvwg-udp-options:
 
 
 --- abstract
@@ -84,7 +85,7 @@ This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is me
 
 Proxies can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.
 
-It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling method to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it.
+It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling method to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it. With QUIC, the encryption of packet headers necessitates using non-transparent instead of transparent proxies, and research works such as the Sidekick {{Sidekick}} and Secure Middlebox-Assisted QUIC (SMAQ) {{SMAQ}} have shown that this is both possible and beneficial.
 
 There are various ways in which On-Path Proxy Discovery (OPPD) can work, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.
 
@@ -101,31 +102,53 @@ This document surveys some possibilities that are available for OPPD.
 
 * Endpoint: an entity that communicates with one or more other endpoints using a specific transport protocol. It is locally identified by the 5-tuple of IP address pair, protocol and port numbers.
 
+
 # General assumptions
 
-* On-path proxy devices are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which means that communication with them must use the same 5-tuple.
+* On-path proxy devices are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which means that communication with them must use the same 5-tuple as the base connection.
 
 * Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of NATs, this is the only way to ensure that communication with the proxy use the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.
 
+* Proxies must somehow prove that they are on-path, perhaps akin to the way it is done with several ICMP messages, by including the first 64 bits of the original packet that evoked them {{?RFC792}}. This establishes a certain minimal level of trust, since on-path devices are in the position to do whatever they want with a connection's packets anyway -- for example discard, rate-limit or duplicate them.
+
 # A survey of possibilities
 
-## Sidekick
+Please insert your ideas below -- or add a description of a scheme that already exists.
 
-In {{Sidekick}}, endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receivers, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
+## Endpoint to proxy
 
-The proxy replies to a sidekick-request packet by sending a special packet from the receiver's IP address and port number back to the endpoint. This packet contains a sidekick-reply marker, an opaque session ID, and an IP address and port number for communicating with the proxy. Upon receiving the sidekick-reply packet, the sender begins communicating directly with the proxy from a different UDP port. It initially sends back the session ID and configuration parameters to start receiving quACKs (special ACKs crafted by a Sidekick proxy).
+### Special packet of base connection
 
-## SMAQ
+Sidekick {{Sidekick}} endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
 
-In {{SMAQ}}, ...TODO.
+Secure Middlebox-Assisted QUIC {{SMAQ}} leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection. The paper mentions that, in this case, "an open problem still to overcome is the possible collision of Connection IDs".
 
-## UDP options
+### Header options
 
-TODO. Describe the possibility (if there is one?).
+An endpoint could use a newly defined TCP option or a UDP option
+{{?I-D.ietf-tsvwg-udp-options}} to signal proxy support. Such an option
+could be defined to be ignored by the receiving endpoint, and receiving
+endpoints that are not upgraded to support the option should ignore
+it anyway. In case of QUIC, for example, the QUIC implementation at the
+receiving endpoint would not even be informed about the message in the
+option. This approach might have the advantage of not possibly confusing
+the receiving endpoint, and it does not require the endhost to send an
+additional packet.
 
-## Please insert your idea here
 
-... or something that already exists. And give a brief description of how it works.
+## Proxy to endpoint
+
+### Special packet of base connection
+
+A sidekick proxy replies to a sidekick-request packet by sending a special packet from the receiver's IP address and port number back to the endpoint {{Sidekick}}. This packet contains a sidekick-reply marker, an opaque session ID, and an IP address and port number for communicating with the proxy. Upon receiving the sidekick-reply packet, the sender begins communicating directly with the proxy from a different UDP port. It initially sends back the session ID and configuration parameters to start receiving quACKs (special ACKs crafted by a Sidekick proxy).
+
+### Header options
+
+A proxy could use insert a newly defined TCP option or a UDP option
+{{?I-D.ietf-tsvwg-udp-options}} in a returning packet (e.g., an ACK)
+to answer back to the endpoint that originally announced its proxy support.
+This approach does not require the proxy to send an additional packet.
+
 
 
 # A survey of open issues
@@ -146,11 +169,7 @@ This list will become longer as we add mechanisms to the preceding section.
 
 # Security Considerations
 
-TODO Security: for now this is copy+pasted text from the NSDI paper.
-
-A malicious third-party could execute a reflection amplification attack that generates a large amount of traffic while hiding its source. This is possible because the sender requests quACKs to a different port and (for some carrier-grade NATs) IP address from the underlying session. To mitigate this, each quACK contains a quota, initially 1, of remaining quACKs the proxy will send as well as an updated session ID. The quota and session ID ensure only the sender can increase the quota or otherwise reconfigure the session.
-
-An adversarial PEP could send misleading information to the sender. Note that only on-path PEPs can send credible information, since they refer to unique packet identifiers. To mitigate this, the sender can consider PEP feedback along with end-to-end metrics to determine whether to keep using the PEP. The sender can always opt out of the PEP, and the PEP cannot actively manipulate traffic any more than outside a sidekick setting.
+TODO.
 
 
 # IANA Considerations
