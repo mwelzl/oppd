@@ -74,7 +74,7 @@ informative:
 
 --- abstract
 
-[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified?), and that we target PANRG. Should it carry a different name? ]
+[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified, and is it a good idea?), and that we target PANRG. Should it carry a different name? ]
 
 This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin.
 
@@ -85,7 +85,7 @@ This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is me
 
 Proxies can carry out functions that improve the performance of an end-to-end connection. These function can be quite diverse, ranging from minimal help (e.g. just offering information) to more significant interference, e.g. splitting an end-to-end connection in half, for reliability, congestion control or both.
 
-It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling or forwarding approach to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of known problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it. With QUIC, the encryption of packet headers necessitates using non-transparent instead of transparent proxies, and research works such as the Sidekick {{Sidekick}} and Secure Middlebox-Assisted QUIC (SMAQ) {{SMAQ}} have shown that this is both possible and beneficial.
+It is commonly desirable for such proxies to be located on the path(s) that a connection already traverses, rather than using a tunneling or forwarding approach to enforce a path. This is naturally the case for transparent "Performance Enhancing Proxies" (PEPs) that have been implemented for TCP, but the transparent nature of such proxies has caused a number of problems in the past. Non-transparent proxies leave the choice of utilizing and configuring a performance enhancing function to end systems -- and such a choice requires a means to detect the proxy and explicitly communicate with it. With QUIC, the encryption of packet headers necessitates using non-transparent instead of transparent proxies, and research works such as the Sidekick {{Sidekick}} and Secure Middlebox-Assisted QUIC (SMAQ) {{SMAQ}} have shown that this is both possible and beneficial.
 
 There are various ways in which On-Path Proxy Discovery (OPPD) can work, and they differ from the ways in which end systems learn about proxies that are not necessarily on-path.
 
@@ -98,16 +98,16 @@ This document surveys some possibilities that are available for OPPD.
 
 # Terminology
 
-* Base connection: an end-to-end connection between two endpoints on which an on-path proxy is expect to carry out a performance-improving function.
+* Base connection: an end-to-end connection between two endpoints on which an on-path proxy is expected to carry out a performance-improving function.
 
-* Endpoint: an entity that communicates with one or more other endpoints using a specific transport protocol. It is locally identified by the 5-tuple of IP address pair, protocol and port numbers.
+* Endpoint: an entity that communicates with one or more other endpoints using a specific base connection. It is locally identified by the base connection's 5-tuple of IP address pair, protocol and port numbers.
 
 
 # General assumptions
 
-* On-path proxy devices are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which means that communication with them must use the same 5-tuple as the base connection.
+* On-path proxies are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which, given the prevalence of functions such as Equal-Cost Multi-Path routing (ECMP) {{?RFC2992}}, means that communication with them must use the same 5-tuple as the base connection.
 
-* Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of NATs, this is the only way to ensure that communication with the proxy use the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.
+* Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of Network Address Translators (NATs) {{?RFC2663}}, this is the only way to ensure that communication with the proxy uses the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.
 
 * Proxies must somehow prove that they are on-path, perhaps akin to the way it is done with several ICMP messages, by including the first 64 bits of the original packet that evoked them {{?RFC792}}. This establishes a certain minimal level of trust, since on-path devices are in the position to do whatever they want with a connection's packets anyway -- for example discard, rate-limit or duplicate them.
 
@@ -119,15 +119,16 @@ Please insert your ideas below -- or add a description of a scheme that already 
 
 ### Special packet of base connection
 
-Sidekick {{Sidekick}} endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
+Sidekick {{Sidekick}} endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker over the base connection's 5-tuple. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
 
 Secure Middlebox-Assisted QUIC {{SMAQ}} leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection. The paper mentions that, in this case, "an open problem still to overcome is the possible collision of Connection IDs".
+[MICHAEL: For this, why does it matter whether OPPD uses such multiplexing?]
 
 ### Header options
 
-An endpoint could use a newly defined TCP option or a UDP option
+An endpoint could use a newly defined TCP option or UDP option
 {{?I-D.ietf-tsvwg-udp-options}} to signal proxy support. Such an option
-could be defined to be ignored by the receiving endpoint, and receiving
+could be specified to be ignored by the receiving endpoint, and receiving
 endpoints that are not upgraded to support the option should ignore
 it anyway. In case of QUIC, for example, the QUIC implementation at the
 receiving endpoint would not even be informed about the message in the
@@ -144,7 +145,7 @@ A sidekick proxy replies to a sidekick-request packet by sending a special packe
 
 ### Header options
 
-A proxy could use insert a newly defined TCP option or a UDP option
+A proxy could insert a newly defined TCP option or UDP option
 {{?I-D.ietf-tsvwg-udp-options}} in a returning packet (e.g., an ACK)
 to answer back to the endpoint that originally announced its proxy support.
 This approach does not require the proxy to send an additional packet.
@@ -166,6 +167,9 @@ This list will become longer as we add mechanisms to the preceding section.
 
 {{?I-D.kuehlewind-quic-proxy-discovery}} lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.
 
+# TODO - a reading list
+
+Look at SPUD and PLUS. At the dinner in Vancouver, STUN was also mentioned.
 
 # Security Considerations
 
