@@ -103,17 +103,17 @@ Table of Contents
 
    It is commonly desirable for such proxies to be located on the
    path(s) that a connection already traverses, rather than using a
-   tunneling method to enforce a path.  This is naturally the case for
-   transparent "Performance Enhancing Proxies" (PEPs) that have been
-   implemented for TCP, but the transparent nature of such proxies has
-   caused a number of known problems in the past.  Non-transparent
-   proxies leave the choice of utilizing and configuring a performance
-   enhancing function to end systems -- and such a choice requires a
-   means to detect the proxy and explicitly communicate with it.  With
-   QUIC, the encryption of packet headers necessitates using non-
-   transparent instead of transparent proxies, and research works such
-   as the Sidekick [Sidekick] and Secure Middlebox-Assisted QUIC (SMAQ)
-   [SMAQ] have shown that this is both possible and beneficial.
+   tunneling or forwarding approach to enforce a path.  This is
+   naturally the case for transparent "Performance Enhancing Proxies"
+   (PEPs) that have been implemented for TCP, but the transparent nature
+   of such proxies has caused a number of known problems in the past.
+   Non-transparent proxies leave the choice of utilizing and configuring
+   a performance enhancing function to end systems -- and such a choice
+   requires a means to detect the proxy and explicitly communicate with
+   it.  With QUIC, the encryption of packet headers necessitates using
+   non-transparent instead of transparent proxies, and research works
+   such as the Sidekick [Sidekick] and Secure Middlebox-Assisted QUIC
+   (SMAQ) [SMAQ] have shown that this is both possible and beneficial.
 
    There are various ways in which On-Path Proxy Discovery (OPPD) can
    work, and they differ from the ways in which end systems learn about
