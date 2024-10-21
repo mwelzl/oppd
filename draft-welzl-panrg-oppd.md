@@ -69,7 +69,6 @@ informative:
           name: Joerg Ott
       date: 2023
   I-D.kuehlewind-quic-proxy-discovery:
-  I-D.trammell-plus-spec:
   I-D.ietf-tsvwg-udp-options:
 
 
@@ -167,7 +166,7 @@ This list will become longer as we add mechanisms to the preceding section.
 
 {{?I-D.kuehlewind-quic-proxy-discovery}} lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} is the use of Port Control Protocol (PCP) options; this is, in some sense, an on-path discovery method since PCP talks to NATs, which are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.
 
-OPPD shares the on-path communication constraint with Path Layer UDP Substrate (PLUS) {{?I-D.trammell-plus-spec}}. As such, there are commonalities between PLUS and OPPD such as the potential sharing of ports. However, the PLUS wire image in {{?I-D.trammell-plus-spec}} is designed for the endpoint-to-network direction of signaling, which eliminates the need for an on-path proxy to prove that it has seen a packet.
+OPPD shares the on-path communication constraint with Path Layer UDP Substrate (PLUS). As such, there are commonalities between PLUS and OPPD such as the potential sharing of ports. However, the PLUS wire image was designed for the endpoint-to-network direction of signaling, which eliminates the need for an on-path proxy to prove that it has seen a packet.
 
 
 # Security Considerations
