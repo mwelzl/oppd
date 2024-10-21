@@ -171,7 +171,7 @@ OPPD shares the on-path communication constraint with Path Layer UDP Substrate (
 
 # Security Considerations
 
-The idea of OPPD is only to discover on-path proxies. These devices must make it reasonably credible that they are indeed on-path; see the last item in {{notation}}.
+The idea of OPPD is only to discover on-path proxies. These devices must make it reasonably credible that they are indeed on-path; see the last item in {{general}}.
 
 Further security considerations will depend on the use case.
 
