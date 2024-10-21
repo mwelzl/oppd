@@ -254,9 +254,12 @@ Table of Contents
    OPPD shares the on-path communication constraint with Path Layer UDP
    Substrate (PLUS).  As such, there are commonalities between PLUS and
    OPPD such as the potential sharing of ports.  However, the PLUS wire
-   image was designed for the endpoint-to-network direction of
-   signaling, which eliminates the need for an on-path proxy to prove
-   that it has seen a packet.
+   image in [I-D.trammell-plus-spec] was designed for the endpoint-to-
+   network direction of signaling, which eliminates the need for an on-
+   path proxy to prove that it has seen a packet.  Being designed to
+   support in-network measurement and state maintenance, PLUS is
+   generally a much more sophisticated construct than what we expect to
+   need for OPPD.
 
 8.  Security Considerations
 
@@ -299,6 +302,13 @@ Table of Contents
               discovery-01, 27 January 2020,
               <https://datatracker.ietf.org/doc/html/draft-kuehlewind-
               quic-proxy-discovery-01>.
+
+   [I-D.trammell-plus-spec]
+              Trammell, B. and M. Kühlewind, "Path Layer UDP Substrate
+              Specification", Work in Progress, Internet-Draft, draft-
+              trammell-plus-spec-01, 13 March 2017,
+              <https://datatracker.ietf.org/doc/html/draft-trammell-
+              plus-spec-01>.
 
    [RFC2663]  Srisuresh, P. and M. Holdrege, "IP Network Address
               Translator (NAT) Terminology and Considerations",

@@ -1352,7 +1352,7 @@ This approach does not require the proxy to send an additional packet.<a href="#
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-examined-material-that-was-" class="section-name selfRef">Examined material that was not included</a>
       </h2>
 <p id="section-7-1"><span>[<a href="#I-D.kuehlewind-quic-proxy-discovery" class="cite xref">I-D.kuehlewind-quic-proxy-discovery</a>]</span> lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in <span>[<a href="#I-D.kuehlewind-quic-proxy-discovery" class="cite xref">I-D.kuehlewind-quic-proxy-discovery</a>]</span> is the use of Port Control Protocol (PCP) options; this is, in some sense, an on-path discovery method since PCP talks to NATs, which are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">OPPD shares the on-path communication constraint with Path Layer UDP Substrate (PLUS). As such, there are commonalities between PLUS and OPPD such as the potential sharing of ports. However, the PLUS wire image was designed for the endpoint-to-network direction of signaling, which eliminates the need for an on-path proxy to prove that it has seen a packet.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-2">OPPD shares the on-path communication constraint with Path Layer UDP Substrate (PLUS). As such, there are commonalities between PLUS and OPPD such as the potential sharing of ports. However, the PLUS wire image in <span>[<a href="#I-D.trammell-plus-spec" class="cite xref">I-D.trammell-plus-spec</a>]</span> was designed for the endpoint-to-network direction of signaling, which eliminates the need for an on-path proxy to prove that it has seen a packet. Being designed to support in-network measurement and state maintenance, PLUS is generally a much more sophisticated construct than what we expect to need for OPPD.<a href="#section-7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1407,6 +1407,10 @@ This approach does not require the proxy to send an additional packet.<a href="#
 <dt id="I-D.kuehlewind-quic-proxy-discovery">[I-D.kuehlewind-quic-proxy-discovery]</dt>
         <dd>
 <span class="refAuthor">Kühlewind, M.</span> and <span class="refAuthor">Z. Sarker</span>, <span class="refTitle">"Discovery Mechanism for QUIC-based, Non-transparent Proxy Services"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-kuehlewind-quic-proxy-discovery-01</span>, <time datetime="2020-01-27" class="refDate">27 January 2020</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-kuehlewind-quic-proxy-discovery-01">https://datatracker.ietf.org/doc/html/draft-kuehlewind-quic-proxy-discovery-01</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.trammell-plus-spec">[I-D.trammell-plus-spec]</dt>
+        <dd>
+<span class="refAuthor">Trammell, B.</span> and <span class="refAuthor">M. Kühlewind</span>, <span class="refTitle">"Path Layer UDP Substrate Specification"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-trammell-plus-spec-01</span>, <time datetime="2017-03-13" class="refDate">13 March 2017</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-trammell-plus-spec-01">https://datatracker.ietf.org/doc/html/draft-trammell-plus-spec-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2663">[RFC2663]</dt>
         <dd>
