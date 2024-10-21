@@ -69,15 +69,15 @@ informative:
           name: Joerg Ott
       date: 2023
   I-D.kuehlewind-quic-proxy-discovery:
+  I-D.trammell-plus-spec:
   I-D.ietf-tsvwg-udp-options:
 
 
 --- abstract
 
-[ Please add something to this draft, and then add your name to the author list. Also, consider the draft title: it now indicates that I'm the primary dude here (is that really justified, and is it a good idea?), and that we target PANRG. Should it carry a different name? ]
+This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin (see the github page linked under "About This Document" for coordinates).
 
-This document surveys possibilities for On-Path Proxy Discovery (OPPD). It is meant to help the conversation in a planned side meeting at IETF-121 in Dublin.
-
+The draft title indicates PANRG as a target of this document just because we thought that PANRG should be informed. What a suitable target is, and if this is even the right type of document, should all be discussed at the side meeting.
 
 --- middle
 
@@ -103,13 +103,13 @@ This document surveys some possibilities that are available for OPPD.
 * Endpoint: an entity that communicates with one or more other endpoints using a specific base connection. It is locally identified by the base connection's 5-tuple of IP address pair, protocol and port numbers.
 
 
-# General assumptions
+# General assumptions {#general}
 
 * On-path proxies are expected to carry out functions in relation to a base connection. Thus, they must be on the same path, which, given the prevalence of functions such as Equal-Cost Multi-Path routing (ECMP) {{?RFC2992}}, means that communication with them must use the same 5-tuple as the base connection.
 
 * Endpoint initiation: OPPD must be initiated by an endpoint. First, in the presence of Network Address Translators (NATs) {{?RFC2663}}, this is the only way to ensure that communication with the proxy uses the same IP addresses and port numbers as the base connection. Second, in this way, endpoints can execute some kind of flow control to avoid the reception of many unsolicited announcements.
 
-* Proxies must somehow prove that they are on-path, perhaps akin to the way it is done with several ICMP messages, by including the first 64 bits of the original packet that evoked them {{?RFC792}}. This establishes a certain minimal level of trust, since on-path devices are in the position to do whatever they want with a connection's packets anyway -- for example discard, rate-limit or duplicate them.
+* Proxies must somehow prove that they are on-path, akin to the way it is done with several ICMP messages that include the first 64 bits of the original packet that evoked them {{?RFC792}}. Naturally, the part of the original packet that is to be returned must not be too easy to guess--e.g. a nonce of a certain minimum length. This establishes a certain minimal level of trust, since on-path devices are in the position to do whatever they want with a connection's packets anyway -- for example discard, rate-limit or duplicate them.
 
 # A survey of possibilities
 
@@ -121,8 +121,7 @@ Please insert your ideas below -- or add a description of a scheme that already 
 
 Sidekick {{Sidekick}} endpoints signal proxy support by sending a distinguished packet containing a 128-byte sidekick-request marker over the base connection's 5-tuple. Such inline signaling could confuse receiving endpoints, but sidekicks target protocols such as QUIC that discard cryptographically unauthenticated data anyway.
 
-Secure Middlebox-Assisted QUIC {{SMAQ}} leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection. The paper mentions that, in this case, "an open problem still to overcome is the possible collision of Connection IDs".
-[MICHAEL: For this, why does it matter whether OPPD uses such multiplexing?]
+Secure Middlebox-Assisted QUIC {{SMAQ}} leaves the design of a proxy discovery solution as future work, but also suggests to multiplex the necessary signaling over the same 5-tuple as the base connection.
 
 ### Header options
 
@@ -157,23 +156,25 @@ This approach does not require the proxy to send an additional packet.
 Just an idea, having a separate list of common problems to be considered might be helpful. For example:
 
 * How to handle multiple proxies on a path?
+  * Suggestion: Each proxy could send a special packet back to the endpoint, or add its information to a header option as long as there is enough space.
 * How to deal with multi-path?
-  * Suggestion (Michael): we ignore it, we just apply the discovery per path. Endpoints are expected to initiate the discovery process for every path at which they want to make use of a proxy should a proxy be available.
+  * Suggestion: we ignore it, we just apply the discovery per path. Endpoints are expected to initiate the discovery process for every path at which they want to make use of a proxy should a proxy be available.
 
 This list will become longer as we add mechanisms to the preceding section.
 
 
 # Examined material that was not included
 
-{{?I-D.kuehlewind-quic-proxy-discovery}} lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} document is the use of PCP; this is, in some sense, an on-path discovery method since NATs are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.
+{{?I-D.kuehlewind-quic-proxy-discovery}} lists several possibilities for proxy discovery, but the proxies in question need not be on-path. One notable possibility mentioned in {{?I-D.kuehlewind-quic-proxy-discovery}} is the use of Port Control Protocol (PCP) options; this is, in some sense, an on-path discovery method since PCP talks to NATs, which are necessarily on-path. However, there is no reason to limit the discovery process described in the present document to scenarios with NATs only.
 
-# TODO - a reading list
+OPPD shares the on-path communication constraint with Path Layer UDP Substrate (PLUS) {{?I-D.trammell-plus-spec}}. As such, there are commonalities between PLUS and OPPD such as the potential sharing of ports. However, the PLUS wire image in {{?I-D.trammell-plus-spec}} is designed for the endpoint-to-network direction of signaling, which eliminates the need for an on-path proxy to prove that it has seen a packet.
 
-Look at SPUD and PLUS. At the dinner in Vancouver, STUN was also mentioned.
 
 # Security Considerations
 
-TODO.
+The idea of OPPD is only to discover on-path proxies. These devices must make it reasonably credible that they are indeed on-path; see the last item in {{notation}}.
+
+Further security considerations will depend on the use case.
 
 
 # IANA Considerations
@@ -183,7 +184,7 @@ This document has no IANA actions.
 
 --- back
 
-# Acknowledgments
+<!--# Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+TODO acknowledge.-->
