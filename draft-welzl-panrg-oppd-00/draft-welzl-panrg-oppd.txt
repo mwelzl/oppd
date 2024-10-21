@@ -1,0 +1,336 @@
+
+
+
+
+Path Aware Networking RG                                        M. Welzl
+Internet-Draft                                        University of Oslo
+Intended status: Informational                           21 October 2024
+Expires: 24 April 2025
+
+
+                        On-Path Proxy Discovery
+                     draft-welzl-panrg-oppd-latest
+
+Abstract
+
+   This document surveys possibilities for On-Path Proxy Discovery
+   (OPPD).  It is meant to help the conversation in a planned side
+   meeting at IETF-121 in Dublin (see the github page linked under
+   "About This Document" for coordinates).
+
+   The draft title indicates PANRG as a target of this document just
+   because we thought that PANRG should be informed.  What a suitable
+   target is, and if this is even the right type of document, should all
+   be discussed at the side meeting.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://mwelzl.github.io/oppd/draft-welzl-panrg-oppd.html.  Status
+   information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-welzl-panrg-oppd/.
+
+   Discussion of this document takes place on the Path Aware Networking
+   RG Research Group mailing list (mailto:panrg@irtf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/panrg.
+   Subscribe at https://www.ietf.org/mailman/listinfo/panrg/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/mwelzl/oppd.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 24 April 2025.
+
+Copyright Notice
+
+   Copyright (c) 2024 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Conventions and Definitions
+   3.  Terminology
+   4.  General assumptions
+   5.  A survey of possibilities
+     5.1.  Endpoint to proxy
+       5.1.1.  Special packet of base connection
+       5.1.2.  Header options
+     5.2.  Proxy to endpoint
+       5.2.1.  Special packet of base connection
+       5.2.2.  Header options
+   6.  A survey of open issues
+   7.  Examined material that was not included
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
+   Author's Address
+
+1.  Introduction
+
+   Proxies can carry out functions that improve the performance of an
+   end-to-end connection.  These function can be quite diverse, ranging
+   from minimal help (e.g. just offering information) to more
+   significant interference, e.g. splitting an end-to-end connection in
+   half, for reliability, congestion control or both.
+
+   It is commonly desirable for such proxies to be located on the
+   path(s) that a connection already traverses, rather than using a
+   tunneling or forwarding approach to enforce a path.  This is
+   naturally the case for transparent "Performance Enhancing Proxies"
+   (PEPs) that have been implemented for TCP, but the transparent nature
+   of such proxies has caused a number of problems in the past.  Non-
+   transparent proxies leave the choice of utilizing and configuring a
+   performance enhancing function to end systems -- and such a choice
+   requires a means to detect the proxy and explicitly communicate with
+   it.  With QUIC, the encryption of packet headers necessitates using
+   non-transparent instead of transparent proxies, and research works
+   such as the Sidekick [Sidekick] and Secure Middlebox-Assisted QUIC
+   (SMAQ) [SMAQ] have shown that this is both possible and beneficial.
+
+   There are various ways in which On-Path Proxy Discovery (OPPD) can
+   work, and they differ from the ways in which end systems learn about
+   proxies that are not necessarily on-path.
+
+   This document surveys some possibilities that are available for OPPD.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+3.  Terminology
+
+   *  Base connection: an end-to-end connection between two endpoints on
+      which an on-path proxy is expected to carry out a performance-
+      improving function.
+
+   *  Endpoint: an entity that communicates with one or more other
+      endpoints using a specific base connection.  It is locally
+      identified by the base connection's 5-tuple of IP address pair,
+      protocol and port numbers.
+
+4.  General assumptions
+
+   *  On-path proxies are expected to carry out functions in relation to
+      a base connection.  Thus, they must be on the same path, which,
+      given the prevalence of functions such as Equal-Cost Multi-Path
+      routing (ECMP) [RFC2992], means that communication with them must
+      use the same 5-tuple as the base connection.
+
+   *  Endpoint initiation: OPPD must be initiated by an endpoint.
+      First, in the presence of Network Address Translators (NATs)
+      [RFC2663], this is the only way to ensure that communication with
+      the proxy uses the same IP addresses and port numbers as the base
+      connection.  Second, in this way, endpoints can execute some kind
+      of flow control to avoid the reception of many unsolicited
+      announcements.
+
+   *  Proxies must somehow prove that they are on-path, akin to the way
+      it is done with several ICMP messages that include the first 64
+      bits of the original packet that evoked them [RFC792].  Naturally,
+      the part of the original packet that is to be returned must not be
+      too easy to guess--e.g. a nonce of a certain minimum length.  This
+      establishes a certain minimal level of trust, since on-path
+      devices are in the position to do whatever they want with a
+      connection's packets anyway -- for example discard, rate-limit or
+      duplicate them.
+
+5.  A survey of possibilities
+
+   Please insert your ideas below -- or add a description of a scheme
+   that already exists.
+
+5.1.  Endpoint to proxy
+
+5.1.1.  Special packet of base connection
+
+   Sidekick [Sidekick] endpoints signal proxy support by sending a
+   distinguished packet containing a 128-byte sidekick-request marker
+   over the base connection's 5-tuple.  Such inline signaling could
+   confuse receiving endpoints, but sidekicks target protocols such as
+   QUIC that discard cryptographically unauthenticated data anyway.
+
+   Secure Middlebox-Assisted QUIC [SMAQ] leaves the design of a proxy
+   discovery solution as future work, but also suggests to multiplex the
+   necessary signaling over the same 5-tuple as the base connection.
+
+5.1.2.  Header options
+
+   An endpoint could use a newly defined TCP option or UDP option
+   [I-D.ietf-tsvwg-udp-options] to signal proxy support.  Such an option
+   could be specified to be ignored by the receiving endpoint, and
+   receiving endpoints that are not upgraded to support the option
+   should ignore it anyway.  In case of QUIC, for example, the QUIC
+   implementation at the receiving endpoint would not even be informed
+   about the message in the option.  This approach might have the
+   advantage of not possibly confusing the receiving endpoint, and it
+   does not require the endhost to send an additional packet.
+
+5.2.  Proxy to endpoint
+
+5.2.1.  Special packet of base connection
+
+   A sidekick proxy replies to a sidekick-request packet by sending a
+   special packet from the receiver's IP address and port number back to
+   the endpoint [Sidekick].  This packet contains a sidekick-reply
+   marker, an opaque session ID, and an IP address and port number for
+   communicating with the proxy.  Upon receiving the sidekick-reply
+   packet, the sender begins communicating directly with the proxy from
+   a different UDP port.  It initially sends back the session ID and
+   configuration parameters to start receiving quACKs (special ACKs
+   crafted by a Sidekick proxy).
+
+5.2.2.  Header options
+
+   A proxy could insert a newly defined TCP option or UDP option
+   [I-D.ietf-tsvwg-udp-options] in a returning packet (e.g., an ACK) to
+   answer back to the endpoint that originally announced its proxy
+   support.  This approach does not require the proxy to send an
+   additional packet.
+
+6.  A survey of open issues
+
+   Just an idea, having a separate list of common problems to be
+   considered might be helpful.  For example:
+
+   *  How to handle multiple proxies on a path?
+
+      -  Suggestion: Each proxy could send a special packet back to the
+         endpoint, or add its information to a header option as long as
+         there is enough space.
+
+   *  How to deal with multi-path?
+
+      -  Suggestion: we ignore it, we just apply the discovery per path.
+         Endpoints are expected to initiate the discovery process for
+         every path at which they want to make use of a proxy should a
+         proxy be available.
+
+   This list will become longer as we add mechanisms to the preceding
+   section.
+
+7.  Examined material that was not included
+
+   [I-D.kuehlewind-quic-proxy-discovery] lists several possibilities for
+   proxy discovery, but the proxies in question need not be on-path.
+   One notable possibility mentioned in
+   [I-D.kuehlewind-quic-proxy-discovery] is the use of Port Control
+   Protocol (PCP) options; this is, in some sense, an on-path discovery
+   method since PCP talks to NATs, which are necessarily on-path.
+   However, there is no reason to limit the discovery process described
+   in the present document to scenarios with NATs only.
+
+   OPPD shares the on-path communication constraint with Path Layer UDP
+   Substrate (PLUS).  As such, there are commonalities between PLUS and
+   OPPD such as the potential sharing of ports.  However, the PLUS wire
+   image in [I-D.trammell-plus-spec] was designed for the endpoint-to-
+   network direction of signaling, which eliminates the need for an on-
+   path proxy to prove that it has seen a packet.  Being designed to
+   support in-network measurement and state maintenance, PLUS is
+   generally a much more sophisticated construct than what we expect to
+   need for OPPD.
+
+8.  Security Considerations
+
+   The idea of OPPD is only to discover on-path proxies.  These devices
+   must make it reasonably credible that they are indeed on-path; see
+   the last item in Section 4.
+
+   Further security considerations will depend on the use case.
+
+9.  IANA Considerations
+
+   This document has no IANA actions.
+
+10.  References
+
+10.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+10.2.  Informative References
+
+   [I-D.ietf-tsvwg-udp-options]
+              Touch, J. D. and C. M. Heard, "Transport Options for UDP",
+              Work in Progress, Internet-Draft, draft-ietf-tsvwg-udp-
+              options-37, 13 October 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-
+              udp-options-37>.
+
+   [I-D.kuehlewind-quic-proxy-discovery]
+              Kühlewind, M. and Z. Sarker, "Discovery Mechanism for
+              QUIC-based, Non-transparent Proxy Services", Work in
+              Progress, Internet-Draft, draft-kuehlewind-quic-proxy-
+              discovery-01, 27 January 2020,
+              <https://datatracker.ietf.org/doc/html/draft-kuehlewind-
+              quic-proxy-discovery-01>.
+
+   [I-D.trammell-plus-spec]
+              Trammell, B. and M. Kühlewind, "Path Layer UDP Substrate
+              Specification", Work in Progress, Internet-Draft, draft-
+              trammell-plus-spec-01, 13 March 2017,
+              <https://datatracker.ietf.org/doc/html/draft-trammell-
+              plus-spec-01>.
+
+   [RFC2663]  Srisuresh, P. and M. Holdrege, "IP Network Address
+              Translator (NAT) Terminology and Considerations",
+              RFC 2663, DOI 10.17487/RFC2663, August 1999,
+              <https://www.rfc-editor.org/rfc/rfc2663>.
+
+   [RFC2992]  Hopps, C., "Analysis of an Equal-Cost Multi-Path
+              Algorithm", RFC 2992, DOI 10.17487/RFC2992, November 2000,
+              <https://www.rfc-editor.org/rfc/rfc2992>.
+
+   [RFC792]   Postel, J., "Internet Control Message Protocol", STD 5,
+              RFC 792, DOI 10.17487/RFC0792, September 1981,
+              <https://www.rfc-editor.org/rfc/rfc792>.
+
+   [Sidekick] "Sidekick: In-Network Assistance for Secure End-to-End
+              Transport Protocols", Usenix NSDI 2024 , 2024.
+
+   [SMAQ]     "Secure Middlebox-Assisted QUIC", IFIP NETWORKING 2023 ,
+              2023.
+
+Author's Address
+
+   Michael Welzl
+   University of Oslo
+   Email: michawe@ifi.uio.no
