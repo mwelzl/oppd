@@ -8,7 +8,7 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 * If you're interested, please join our [mailing list](https://groups.google.com/g/oppd-ietf).
 * We will have a side meeting **in Dublin (IETF-121) on Thursday, 7 November 2024, from 18:30 to 20:00**.
   * *On site:* we meet **in Wicklow Hall 2A.**
-  * *Remote coordinates:* see below
+  * *Remote coordinates:* see below; [ics file](ietf121-oppd.ics)
 
 ```
 Topic: OPPD side meeting
