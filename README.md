@@ -6,9 +6,15 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 ---
 
 * If you're interested, please join our [mailing list](https://groups.google.com/g/oppd-ietf).
-* We will have a side meeting **in Dublin (IETF-121) on Thursday, 7 November 2024, from 18:30 to 20:00**.
-  * *On site:* we meet **in Wicklow Hall 2A.**
-  * *Remote coordinates:* see below; [ics file](ietf121-oppd.ics)
+* We will have a side meeting **in Dublin (IETF-121) on Thursday, 7 November 2024, in Wicklow Hall 2A, from 18:30 to 19:30**.
+* Agenda:
+  * **15 min** [presentation](slides/) to frame the discussion
+  * **45 min** discussion about:
+     1. Where should this work happen?
+     2. Where should we do following work on performance enhancing functions?  (SMAQ / Sidekick / .. ?)
+     3. Design of OPPD
+
+* Remote coordinates:* see below; [ics file](ietf121-oppd.ics)
 
 ```
 Topic: OPPD side meeting
@@ -67,7 +73,7 @@ We think that potential venues are:
 
 
 # draft-welzl-panrg-oppd
-### An informational draft to survey the possibilities
+### An informational draft to survey the possibilities, to help the discussion
 
 This is the working area for the individual Internet-Draft, "On-Path Proxy Discovery".
 
