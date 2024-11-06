@@ -4,8 +4,8 @@
 
 Path Aware Networking RG                                        M. Welzl
 Internet-Draft                                        University of Oslo
-Intended status: Informational                           30 October 2024
-Expires: 3 May 2025
+Intended status: Informational                           6 November 2024
+Expires: 10 May 2025
 
 
                         On-Path Proxy Discovery
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 May 2025.
+   This Internet-Draft will expire on 10 May 2025.
 
 Copyright Notice
 
@@ -291,9 +291,9 @@ Table of Contents
    [I-D.ietf-tsvwg-udp-options]
               Touch, J. D. and C. M. Heard, "Transport Options for UDP",
               Work in Progress, Internet-Draft, draft-ietf-tsvwg-udp-
-              options-37, 13 October 2024,
+              options-38, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-tsvwg-
-              udp-options-37>.
+              udp-options-38>.
 
    [I-D.kuehlewind-quic-proxy-discovery]
               Kühlewind, M. and Z. Sarker, "Discovery Mechanism for
