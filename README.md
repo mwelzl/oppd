@@ -58,7 +58,7 @@ Password: 790517
  
 ## Who needs this?
 
-* Once [SCONE](https://datatracker.ietf.org/group/sconepro/about/) is chartered, we think it will need OPPD.
+* [SCONE](https://datatracker.ietf.org/group/sconepro/about/) is now chartered; we think it will need OPPD.
 * There are some research works that show a need, including:
   * Gina Yuan, Matthew Sotoudeh, David K. Zhang, Michael Welzl, David Mazières, Keith Winstein: "[Sidekick: In-Network Assistance for Secure End-to-End Transport Protocols](https://www.usenix.org/conference/nsdi24/presentation/yuan)", Usenix NSDI '24, Santa Clara, CA, USA, 16-18 April 2024. *(Recipient of Outstanding paper award and Community award)*
   * M. Kosek, B. Spies and J. Ott, "[Secure Middlebox-Assisted QUIC](https://ieeexplore.ieee.org/document/10186363)", 2023 IFIP Networking Conference (IFIP Networking), Barcelona, Spain, 2023. [Preprint](https://arxiv.org/abs/2307.08543)
