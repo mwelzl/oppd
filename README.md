@@ -6,7 +6,7 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 ---
 
 * If you're interested, please join our [mailing list](https://groups.google.com/g/oppd-ietf).
-* We will have a side meeting **in Dublin (IETF-121) on Thursday, 7 November 2024, in Wicklow Hall 2A, from 18:30 to 19:30**.
+* We had a side meeting **in Dublin (IETF-121) on Thursday, 7 November 2024, in Wicklow Hall 2A, from 18:30 to 19:30**.
 * **Agenda:**
   * **15 min** [presentation](slides/) to frame the discussion
   * **45 min** discussion about:
@@ -17,6 +17,7 @@ This is the starting point for an IETF activity on on-path proxy discovery.
 * Remote coordinates: IETF-provided access [https://ietf.webex.com/meet/ietfsidemeeting2](https://ietf.webex.com/meet/ietfsidemeeting2)
 * [ics file](ietf121-oppd.ics)
 * **[Document with participant list and meeting minutes](https://docs.google.com/document/d/16klYR4bxUI13i9p1kBPDkqnGktNkSqKOrWZF7zCehYk/edit?usp=sharing)**
+* **[Recording](https://ietf.webex.com/ietf/ldr.php?RCID=7d5696a5c745948ca1f9e4399964b311)**
 
 
 **Please don't hesitate to edit anything here - including this readme file!**
