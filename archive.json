@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-13T01:09:05.804602+00:00",
+  "timestamp": "2025-03-16T01:13:17.224695+00:00",
   "repo": "mwelzl/oppd",
   "labels": [
     {
@@ -49,6 +49,45 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOMy64RM6uCmY3",
+      "title": "Expand Section 8 \u2013 Security Considerations to Address Spoofing, Replay Attacks, and DoS Risks",
+      "url": "https://github.com/mwelzl/oppd/issues/1",
+      "state": "OPEN",
+      "author": "shaileshprabhu95",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "To enhance the security aspects of On-Path Proxy Discovery (OPPD), I propose the following updates:\n\n1. **Preventing Spoofed Proxy Discovery Responses**\n    - Attackers could inject **fake proxy discovery responses** to mislead endpoints.\n    - **Mitigation strategies**:\n      - **Nonce-based verification**: Endpoints send a random nonce in discovery requests, and proxies must return it to prove authenticity.\n      - **HMAC-based proof**: Responses signed with pre-shared keys (similar to TCP-AO (RFC5925)) to prevent spoofing.\n \n2. **Ensuring Proxies are Actually On-Path**\n    - A rogue proxy could falsely claim to be \"**on-path**\".\n    - **Mitigation strategies**:\n      - **ICMP-style proof mechanism**: Proxy echoes back part of the original packet ([RFC792]).\n      - **TLS token-based validation**: Proxy signs its response using a key derived from the TLS handshake with the endpoint.\n\n3. **Preventing Replay Attacks**\n    - Attackers could capture valid discovery responses and **replay** them later.\n    - **Mitigation strategies**:\n      - **Nonce-based authentication** to ensure fresh responses.\n      - **Time-based validity** (e.g., short-lived proxy session tokens).\n\n4. **Denial of Service (DoS) Mitigation**\n    - Attackers could **flood endpoints with fake or excessive discovery responses**, leading to resource exhaustion and confusion in proxy selection.\n    - **Mitigation strategies**:\n      - **Rate limiting & anomaly detection**: Endpoints should discard excessive or unusually frequent proxy responses to prevent spam attacks. Anomaly detection can help identify suspicious patterns, such as responses from unexpected sources.\n      - **Response validation**: Endpoints must only process responses that match a previously sent request, reducing the risk of spoofed packets.\n      - **Proof-of-Work challenges**: Lightweight cryptographic challenges can be used to discourage spam discovery attempts.\n  \n",
+      "createdAt": "2025-03-14T11:06:57Z",
+      "updatedAt": "2025-03-14T12:16:33Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "shaileshprabhu95",
+          "authorAssociation": "NONE",
+          "body": "Hi Michael, I can raise a PR if you feel the above Security Considerations and Risks are relevant to the draft. Please let me know your thoughts. Thanks! @mwelzl ",
+          "createdAt": "2025-03-14T11:09:15Z",
+          "updatedAt": "2025-03-14T11:09:15Z"
+        },
+        {
+          "author": "mwelzl",
+          "authorAssociation": "OWNER",
+          "body": "Hi !  Many thanks for the offer - but I don't think it makes sense to extend this draft at this stage. The draft was meant as input for a side meeting, which was held, and didn't lead to enough enthusiasm to take this work onward, I would say. My take-away is that there is *one* way to discover proxies that the IETF will develop as a next step, and that's what's going on in SCONE already.\n\nI should update the README file to reflect that. I'm sorry, I didn't think of doing so.",
+          "createdAt": "2025-03-14T11:34:38Z",
+          "updatedAt": "2025-03-14T11:34:38Z"
+        },
+        {
+          "author": "shaileshprabhu95",
+          "authorAssociation": "NONE",
+          "body": "Thanks, Michael for the update! @mwelzl ",
+          "createdAt": "2025-03-14T12:16:32Z",
+          "updatedAt": "2025-03-14T12:16:32Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
