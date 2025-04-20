@@ -1,3 +1,8 @@
+# This was a try, and it is over. We had a side meeting and concluded that there was not enough industry interest to move ahead.
+
+
+---
+
 # On-Path Proxy Discovery (OPPD)
 
 This is the starting point for an IETF activity on on-path proxy discovery.
